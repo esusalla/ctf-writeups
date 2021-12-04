@@ -1,0 +1,3 @@
+- the challenge hint tells you that the "stay up to date form" is not sanitized and regularly checked by the admin
+- the website title is also "xss", indicating the method of attack and a message on the site tells you to "pop an alert() to get the flag"
+- possible to submit `<script>alert(1)</script>` in the "stay up to date form" in order to retrieve the flag

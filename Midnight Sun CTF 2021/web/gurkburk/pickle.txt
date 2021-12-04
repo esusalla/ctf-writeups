@@ -1,0 +1,22 @@
+ccopy_reg
+_reconstructor
+p0
+(c__main__
+Notes
+p1
+c__builtin__
+object
+p2
+Ntp3
+Rp4
+(dp5
+Vname
+p6
+VMy notes
+p7
+sVnotes
+p8
+(lp9
+Vasdf
+p10
+asb.

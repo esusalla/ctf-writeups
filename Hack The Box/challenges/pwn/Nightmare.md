@@ -1,0 +1,19 @@
+- Takeaways:
+	- possible that none of the one gadgets work with local version of libc but will still work with challenge version (would help to reconstruct locally with Docker)
+	- sometimes stack won't contain libc addresses to leak until certain functions have been called (e.g., needed to run `scream` or `escape` once before libc addresses were placed on the stack and able to be leaked)
+- provided with a binary that has full protections (Canary, NX, PIE) except for RELRO (has NO RELRO instead of usual PARTIAL RELRO, but doesn't really change solution as GOT would be writable either way)
+- the main function prints a menu with three options, `scream`, `escape`, and `exit`
+- the `scream` and `escape` functions both contain format string vulnerabilities, but each with different properties
+- the vuln in the `scream` function can read up to 0x100 bytes in but doesn't return any output (sends its output to stderr which isn't returned by service)
+- the vuln in the `escape` function returns the output but permits a max of six characters
+- solution is to use the vuln in the `escape` function to leak addresses off the stack, use those to construct a payload, then send the payload with the vuln in the `scream` function
+- goal is to get the address of a function within the GOT (so that it can be overwritten) as well as an address of a one gadget within libc (to overwrite with)
+- this requires us to leak two addresses off the stack, one from within the binary and one from within libc, so that the base of each can be calculated and used to get the payload addresses
+- possible to leak an address off the stack that resides within the `main` function of the binary and then use it to calculate the base of the binary (same on both local and remote)
+- also possible to leak an address off the stack that resides within the `__libc_start_main` function within libc
+- somewhat difficult to fingerprint version of libc on the server without being able to leak a specific symbol
+- knew the address being leaked from the stack was within `__libc_start_main`, so took offsets of the specific instruction from various versions of libc and checked if that offset would imply acceptable addresses for both `__libc_start_main` and the libc base address
+- once the libc version on the server was determined, it was possible to look up potential one gadgets for payload construction
+- local version of libc didn't have any functioning gadgets as none of the conditions were met when trying to call `puts` after overwriting the GOT address, but remote version had one that met the critera (specifically `r15` and `rdx` both had to be null)
+	- could have potentially overwritten a different address within the GOT so that the one gadget was called at a different point within the binary and would potentially then meet the requirements for execution, but didn't need to as the remote server had a one gadget that worked with `puts`
+- final step is to build a payload to overwrite the address of `puts` in the GOT with the calculated address of the one gadget so that the next time `puts` gets called it would instead pop a shell

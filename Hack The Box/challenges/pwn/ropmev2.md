@@ -1,0 +1,11 @@
+- provided with a binary that only has NX stack protections
+- it reads up to 500 bytes into a buffer located at rbp-0xd0
+- had difficulty chaining together various ROP instructions (e.g., couldn't leak address with `printf` and then send a second payload)
+- was able to make it work by using the `DEBUG` functionality in the binary which gives you the address of the buffer and then calls `main` again
+- possible to use this provided stack address to pivot the stack which, for an unknown reason, allows chaining together instructions easier
+- the binary contains a trick mechanism where it rotates any alphabetic characters in the payload, but it didn't seem to throw things off, again for an unknown reason
+- leaking addresses with the above mentioned stack pivot technique allowed the libc version on the server to be fingerprinted
+- soon found that the remote version was non-standard and did not have a `/bin/sh` string where it should
+- also could not get any calls to `system` to work
+- found a workaround by placing `/bin/sh` on the stack myself and using an `execve` syscall to run it, but again found that the libc had been adjusted so that "LOL NO" was returned instead
+- using `/bin/bash` instead of `/bin/sh` allows a shell to be spawned and the flag to be read

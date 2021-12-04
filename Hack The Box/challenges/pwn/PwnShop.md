@@ -1,0 +1,15 @@
+- provided with a binary that has NX stack and PIE protections, but no canary
+- main function prints a menu that gives you three options, `buy`, `sell`, and `exit`
+- after further inspecting, the `sell` function contains a portion that asks what you want to sell and for how much
+- if you enter `13.37` as the price you'd like to sell, then it also asks you to leave details which it reads into a variable located in the BSS section of the binary
+- the address of this variable in the BSS section is right next to the 8 bytes that are used to read in your suggested price for the item which gets printed back to you if you enter any price other than `13.37`
+- if you send any 8 bytes as the price (other than \x00), then when the format string prints back the price to you using "%s", the address of the variable in the BSS section is leaked along with it
+- this allows you to now calculate the base of the binary and find everything else in it (but not libc)
+- the `buy` function subtracts 0x48 from the `rsp`, then reads in up to 0x50 bytes directly onto the stack, then subtracts 0x48 and returns
+- it's possible to use this functionality to send 0x50 bytes with the last 8 bytes containing an address to jump to
+- if we find a ROP gadget in the form of `sub rsp, <num <= 48>; ret` then we can use it to move the `rip` back down the stack and execute gadgets that we sent in the payload before the return address
+- we can now use this to construct a ROP payload that leaks the address of `puts`
+- this can be used to fingerprint the version of libc running on the server before using the same functionality to leak the address again and then construct a payload to pop a shell
+- for some reason after sending the first payload and looping back to `main` the menu functionality seems to break
+- this can be fixed by sending a long line of "\n"s and then menu will resume functionality and allow you to enter the `buy` option again so that you can overflow the buffer again and execute the second payload
+	- thinking there is potentially a problem with characters already being in the stdin buffer that keep getting read ahead of the actual input and this is remdied by sending a long line which flushes stdin

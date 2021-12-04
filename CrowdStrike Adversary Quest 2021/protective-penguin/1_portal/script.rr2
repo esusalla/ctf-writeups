@@ -1,0 +1,4 @@
+#!/usr/bin/rarun2
+program=./cgi-bin/portal.cgi
+envfile=./env.txt
+stdin=./data.txt

@@ -1,0 +1,6 @@
+- website allows you to make `nginx` config files
+- able to create account and log in
+- after creating a config, it's possible to see a hint to the `/storage` endpoint spilling secrets
+- the default config setup also sets the `/storage` endpoint to `autoindex on;`, meaning you can easily get a full listing of all files within it
+- navigating to `/storage` reveals there is a `.tar.gz` backup file that contains an `sqlite` database which reveals a hash and email (`nginxatsu-adm-01@makelarid.es`) for the admin
+- the hash can be cracked online and reveals the admin password to be `adminadmin1`

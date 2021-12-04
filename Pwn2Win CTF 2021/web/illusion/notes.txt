@@ -1,0 +1,4 @@
+- https://github.com/Starcounter-Jack/JSON-Patch/pull/262
+- https://github.com/mde/ejs/issues/451
+- https://portswigger.net/daily-swig/prototype-pollution-the-dangerous-and-underrated-vulnerability-impacting-javascript-applications
+- https://blog.p6.is/Real-World-JS-1/

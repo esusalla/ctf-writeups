@@ -1,0 +1,3 @@
+- website allows you to run `ping` or `traceroute`
+- each request triggers a POST requests with `test` and `ip` params
+- the `ip` paramater is vulnerable to command injection, allowing commands to be appended after the IP, e.g. `<ip>; <cmd>`

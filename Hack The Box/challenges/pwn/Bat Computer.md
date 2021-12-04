@@ -1,0 +1,10 @@
+- Takeaways:
+	- can use `pwntools` to quickly generate shellcode payloads, `payload = asm(shellcraft.execve("/bin/sh"))`
+	- need to be sure to set the `context.arch = <architecture>` in order to get the correct shellcode
+- provided with a binary that only has PIE security enabled
+- when ran, it gives you an option to either track or chase the Joker
+- tracking him provides you with an address, which when analyzing the binary can be seen to be on the stack
+- this is also the address that the command input is eventually read into meaning we will need to jump to it in order to execute shellcode
+- chasing him asks for a password (which is easily readable from the binary) and then a command
+- the command buffer can be filled with shellcode and the return address of the main function can be overwritten with the leaked address of the stack
+- after overflowing the buffer, it's possible to exit out of the program and trigger the overwritten return address by entering a "3" rather than a "1" or "2"

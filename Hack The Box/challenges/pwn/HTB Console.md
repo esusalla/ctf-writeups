@@ -1,0 +1,7 @@
+- provided with a binary that has partial RELRO and NX stack protections
+- main function repeatedly calls another function that acts as a fake terminal, allowing you to input several commands (e.g., `id`, `date`, `flag`, `hof`, etc.) and gives back predetermined responses
+- additionally, `system` is present within the binary because `date` calls it
+- there is an overflow in the `flag` option where it's willing to read 0x30 bytes into a buffer at rbp-0x10
+- this allows us to gain control of the instruction pointer and redirect to `system`, but still need to load `/bin/sh` string somewhere
+- the `hof` option reads in a name for the hall of fame and stores it in consistent address in the BSS
+- can use this to load `/bin/sh` at a predictable location before using a `pop rdi` gadget along with the overflow to open a shell

@@ -1,0 +1,10 @@
+- Takeaways:
+	- can use BSS (or any writable segment) as destination for arbitrary writes with format string vulnerability
+	- use `fmtstr_payload` function within `pwntools` rather than trying to hand-assemble exploits (`fmtstr_payload(fmtstr_stack_offset, {dest: value}`)
+	- make sure to set `context.arch` in `pwntools` in order to generate correct format string payload for the architecture
+- provided with a binary that only has NX stack protection
+- it reads in a name, prints it back to you with `printf`, and then compares two values and if they are equal it prints the flag
+- printing back the name introduces a format string vulnerability
+- one of the two values that are compared for equality comes from the writable data segment, the other is calculated from a random number multipled by 0x1337c0de
+- possible to leak the random number from the stack, then calculate the target value and overwrite the value in the writable data segment with it so that the check passes and the flag is printed
+- `%26c%16$lln%54c%17$hhn%125c%18$hhn%34c%19$hhnaaax@@\x00\x00\x00\x00\x00{@@\x00\x00\x00\x00\x00z@@\x00\x00\x00\x00\x00y@@\x00\x00\x00\x00\x00`

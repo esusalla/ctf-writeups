@@ -1,0 +1,6 @@
+- challenge spins up a webpage that points you toward the `/debug` endpoint
+- the `/debug` endpoint reveals the source code for a Python Flask server
+- if the server receives a GET request, it calculates a random number and sends it back
+- if it receives a POST request, it uses an `exec` call and the posted data to assign the value of `measurements` to the value of `ingredient`, which it then returns
+- the `exec` call does not have builtins stripped out, so it's possible to use the 	`subprocess` module and the `check_output` function to capture the output of system calls and read the flag
+	- `__import__('subprocess').check_output(['ls', '/'])`

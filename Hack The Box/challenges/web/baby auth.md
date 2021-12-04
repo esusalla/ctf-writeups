@@ -1,0 +1,2 @@
+- after registering and logging in, it can be seen that the `PHPSESSID` cookie is a base64-encoded JSON containing a `username` field
+- possible to change the JSON to `admin`, base64-encode it, and forge the cookie to retrieve the flag

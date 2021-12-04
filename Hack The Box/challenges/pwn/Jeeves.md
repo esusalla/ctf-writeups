@@ -1,0 +1,3 @@
+- provided with a binary with a fairly obvious overflow resulting from `gets`
+- after reading in a string, the program checks the value of a variable and prints the flag if it matches a certain value
+- the variable that's checked can be overflowed into and overwritten so that the check passes and the flag is printed

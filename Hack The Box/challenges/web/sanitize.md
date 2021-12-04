@@ -1,0 +1,2 @@
+- website is vulnerable to very basic SQL injection and even shows you the query
+- a simple injection on the `password` parameter (`' or '1'='1`) to bypass the `admin` password check retrieves the flag 

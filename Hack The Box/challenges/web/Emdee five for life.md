@@ -1,0 +1,1 @@
+- use Python session object to make request for plaintext string, hash it using MD5, and send it back to the endpoint to retrieve the flag

@@ -1,0 +1,146 @@
+# Nmap 7.92 scan initiated Sat Nov 20 15:24:17 2021 as: nmap -A -p- -oN nmap.txt -v 10.129.230.70
+Nmap scan report for 10.129.230.70
+Host is up (0.031s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT      STATE SERVICE          VERSION
+22/tcp    open  ssh              OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 e7:0d:f9:66:cf:c8:54:e4:72:3f:87:f2:60:34:e9:1c (RSA)
+|   256 35:21:a2:1f:a9:dd:32:83:67:c8:97:7f:17:61:27:d0 (ECDSA)
+|_  256 22:08:6d:95:2c:9a:5e:06:58:e5:5e:57:a3:c2:35:84 (ED25519)
+2379/tcp  open  ssl/etcd-client?
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|_  h2
+| ssl-cert: Subject: commonName=steamcloud
+| Subject Alternative Name: DNS:localhost, DNS:steamcloud, IP Address:10.129.230.70, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+| Issuer: commonName=etcd-ca
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2021-11-20T20:03:38
+| Not valid after:  2022-11-20T20:03:38
+| MD5:   c57d 3c28 11b5 2be6 ba18 0825 4b21 7aad
+|_SHA-1: 6b4d 53ad d438 6d46 1afc 1490 40ef 6e9d c3f5 fcff
+2380/tcp  open  ssl/etcd-server?
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=steamcloud
+| Subject Alternative Name: DNS:localhost, DNS:steamcloud, IP Address:10.129.230.70, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+| Issuer: commonName=etcd-ca
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2021-11-20T20:03:38
+| Not valid after:  2022-11-20T20:03:39
+| MD5:   4624 5c46 9d68 d6a2 5b58 3489 b8fb 6e54
+|_SHA-1: e193 4bb1 e933 306f f5d4 0411 d322 a717 e8eb da67
+| tls-alpn: 
+|_  h2
+8443/tcp  open  ssl/https-alt
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 403 Forbidden
+|     Audit-Id: 7026a4db-d9fc-4861-bfd2-712c7a18379e
+|     Cache-Control: no-cache, private
+|     Content-Type: application/json
+|     X-Content-Type-Options: nosniff
+|     X-Kubernetes-Pf-Flowschema-Uid: fb60ea14-7b01-4e13-8b3a-3ca99ced4f41
+|     X-Kubernetes-Pf-Prioritylevel-Uid: acc928f1-1751-49dc-9e91-808f837bb811
+|     Date: Sat, 20 Nov 2021 20:24:42 GMT
+|     Content-Length: 212
+|     {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"forbidden: User "system:anonymous" cannot get path "/nice ports,/Trinity.txt.bak"","reason":"Forbidden","details":{},"code":403}
+|   GetRequest: 
+|     HTTP/1.0 403 Forbidden
+|     Audit-Id: c9641f71-2288-4b80-a043-8fc3183e5721
+|     Cache-Control: no-cache, private
+|     Content-Type: application/json
+|     X-Content-Type-Options: nosniff
+|     X-Kubernetes-Pf-Flowschema-Uid: fb60ea14-7b01-4e13-8b3a-3ca99ced4f41
+|     X-Kubernetes-Pf-Prioritylevel-Uid: acc928f1-1751-49dc-9e91-808f837bb811
+|     Date: Sat, 20 Nov 2021 20:24:42 GMT
+|     Content-Length: 185
+|     {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"forbidden: User "system:anonymous" cannot get path "/"","reason":"Forbidden","details":{},"code":403}
+|   HTTPOptions: 
+|     HTTP/1.0 403 Forbidden
+|     Audit-Id: bf25e85e-39df-464b-a874-86570978111d
+|     Cache-Control: no-cache, private
+|     Content-Type: application/json
+|     X-Content-Type-Options: nosniff
+|     X-Kubernetes-Pf-Flowschema-Uid: fb60ea14-7b01-4e13-8b3a-3ca99ced4f41
+|     X-Kubernetes-Pf-Prioritylevel-Uid: acc928f1-1751-49dc-9e91-808f837bb811
+|     Date: Sat, 20 Nov 2021 20:24:42 GMT
+|     Content-Length: 189
+|_    {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"forbidden: User "system:anonymous" cannot options path "/"","reason":"Forbidden","details":{},"code":403}
+|_http-title: Site doesn't have a title (application/json).
+| ssl-cert: Subject: commonName=minikube/organizationName=system:masters
+| Subject Alternative Name: DNS:minikubeCA, DNS:control-plane.minikube.internal, DNS:kubernetes.default.svc.cluster.local, DNS:kubernetes.default.svc, DNS:kubernetes.default, DNS:kubernetes, DNS:localhost, IP Address:10.129.230.70, IP Address:10.96.0.1, IP Address:127.0.0.1, IP Address:10.0.0.1
+| Issuer: commonName=minikubeCA
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2021-11-19T20:03:37
+| Not valid after:  2024-11-19T20:03:37
+| MD5:   abf1 899a aec5 067a 5d76 9fcf e335 de27
+|_SHA-1: cf3c c61a 4223 a92f b3cd fde4 591a 3571 fcf7 5eb2
+| tls-alpn: 
+|   h2
+|_  http/1.1
+|_ssl-date: TLS randomness does not represent time
+10249/tcp open  http             Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn't have a title (text/plain; charset=utf-8).
+10250/tcp open  ssl/http         Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn't have a title (text/plain; charset=utf-8).
+| ssl-cert: Subject: commonName=steamcloud@1637438621
+| Subject Alternative Name: DNS:steamcloud
+| Issuer: commonName=steamcloud-ca@1637438621
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2021-11-20T19:03:40
+| Not valid after:  2022-11-20T19:03:40
+| MD5:   ecc6 b368 f661 8371 7ffb 2d2b 127b 6beb
+|_SHA-1: acb2 2e96 b54e e7e3 a150 1456 4c8e bf71 6b63 f1a2
+| tls-alpn: 
+|   h2
+|_  http/1.1
+|_ssl-date: TLS randomness does not represent time
+10256/tcp open  http             Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn't have a title (text/plain; charset=utf-8).
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8443-TCP:V=7.92%T=SSL%I=7%D=11/20%Time=61995989%P=x86_64-pc-linux-g
+SF:nu%r(GetRequest,22F,"HTTP/1\.0\x20403\x20Forbidden\r\nAudit-Id:\x20c964
+SF:1f71-2288-4b80-a043-8fc3183e5721\r\nCache-Control:\x20no-cache,\x20priv
+SF:ate\r\nContent-Type:\x20application/json\r\nX-Content-Type-Options:\x20
+SF:nosniff\r\nX-Kubernetes-Pf-Flowschema-Uid:\x20fb60ea14-7b01-4e13-8b3a-3
+SF:ca99ced4f41\r\nX-Kubernetes-Pf-Prioritylevel-Uid:\x20acc928f1-1751-49dc
+SF:-9e91-808f837bb811\r\nDate:\x20Sat,\x2020\x20Nov\x202021\x2020:24:42\x2
+SF:0GMT\r\nContent-Length:\x20185\r\n\r\n{\"kind\":\"Status\",\"apiVersion
+SF:\":\"v1\",\"metadata\":{},\"status\":\"Failure\",\"message\":\"forbidde
+SF:n:\x20User\x20\\\"system:anonymous\\\"\x20cannot\x20get\x20path\x20\\\"
+SF:/\\\"\",\"reason\":\"Forbidden\",\"details\":{},\"code\":403}\n")%r(HTT
+SF:POptions,233,"HTTP/1\.0\x20403\x20Forbidden\r\nAudit-Id:\x20bf25e85e-39
+SF:df-464b-a874-86570978111d\r\nCache-Control:\x20no-cache,\x20private\r\n
+SF:Content-Type:\x20application/json\r\nX-Content-Type-Options:\x20nosniff
+SF:\r\nX-Kubernetes-Pf-Flowschema-Uid:\x20fb60ea14-7b01-4e13-8b3a-3ca99ced
+SF:4f41\r\nX-Kubernetes-Pf-Prioritylevel-Uid:\x20acc928f1-1751-49dc-9e91-8
+SF:08f837bb811\r\nDate:\x20Sat,\x2020\x20Nov\x202021\x2020:24:42\x20GMT\r\
+SF:nContent-Length:\x20189\r\n\r\n{\"kind\":\"Status\",\"apiVersion\":\"v1
+SF:\",\"metadata\":{},\"status\":\"Failure\",\"message\":\"forbidden:\x20U
+SF:ser\x20\\\"system:anonymous\\\"\x20cannot\x20options\x20path\x20\\\"/\\
+SF:\"\",\"reason\":\"Forbidden\",\"details\":{},\"code\":403}\n")%r(FourOh
+SF:FourRequest,24A,"HTTP/1\.0\x20403\x20Forbidden\r\nAudit-Id:\x207026a4db
+SF:-d9fc-4861-bfd2-712c7a18379e\r\nCache-Control:\x20no-cache,\x20private\
+SF:r\nContent-Type:\x20application/json\r\nX-Content-Type-Options:\x20nosn
+SF:iff\r\nX-Kubernetes-Pf-Flowschema-Uid:\x20fb60ea14-7b01-4e13-8b3a-3ca99
+SF:ced4f41\r\nX-Kubernetes-Pf-Prioritylevel-Uid:\x20acc928f1-1751-49dc-9e9
+SF:1-808f837bb811\r\nDate:\x20Sat,\x2020\x20Nov\x202021\x2020:24:42\x20GMT
+SF:\r\nContent-Length:\x20212\r\n\r\n{\"kind\":\"Status\",\"apiVersion\":\
+SF:"v1\",\"metadata\":{},\"status\":\"Failure\",\"message\":\"forbidden:\x
+SF:20User\x20\\\"system:anonymous\\\"\x20cannot\x20get\x20path\x20\\\"/nic
+SF:e\x20ports,/Trinity\.txt\.bak\\\"\",\"reason\":\"Forbidden\",\"details\
+SF:":{},\"code\":403}\n");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Nov 20 15:26:06 2021 -- 1 IP address (1 host up) scanned in 108.74 seconds
