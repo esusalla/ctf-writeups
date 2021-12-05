@@ -2,12 +2,12 @@
 
 ### Controller: CHTB{1nt3g3r_0v3rfl0w_s4v3d_0ur_r3s0urc3s}
 - use 3 * -66 to trigger negative overflow and meet requirement to read in string with scanf
-- overflow string read in with scanf (must use "b" or "y" instead of usual "A" filler trigger return)
+- overflow string read in with scanf (must use "b" or "y" instead of usual "A" filler to trigger return)
 - leak printf address in libc in order to calculate "/bin/sh" and system function locations
 
 ### Minefield: CHTB{d3struct0r5_m1n3f13ld}
 - binary reads in two values and stores the second one at the address of the first
-- use it as an arbitary write to place the address of the win function ("_" within the binary) somewhere will it will be called
+- use it as an arbitary write to place the address of the win function ("_" within the binary) somewhere where it will be called
 - iterate through binary symbols and GOT entries with pwntools ("BIN.symbols.items()" and "BIN.got.items()") to find suitable write location that triggers win
 
 ### System dROP: CHTB{n0_0utput_n0_pr0bl3m_w1th_sr0p}
